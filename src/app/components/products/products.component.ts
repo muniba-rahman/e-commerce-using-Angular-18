@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-products',
@@ -8,4 +8,17 @@ import { Component } from '@angular/core';
 })
 export class ProductsComponent {
 
+  @ViewChild('newModal') modal:ElementRef | undefined;
+
+  openModal(){
+    if(this.modal){
+      this.modal.nativeElement.style.display = "block";
+    }
+  }
+
+  closeModal() {
+    if(this.modal){
+      this.modal.nativeElement.style.dispaly = "none";
+    }
+  }
 }
