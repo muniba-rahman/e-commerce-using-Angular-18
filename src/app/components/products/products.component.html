@@ -5,7 +5,7 @@
       <button class="btn btn-primary" (click)="openModal()">Add New</button>
     </div>
   </div>
-  <div class="row">
+  <div class="row gy-4">
     @for (item of productData(); track $index) {
     @if(productData().length > 0) {
     <div class="col-4">
@@ -46,17 +46,65 @@
 <div class="modal" #newModal>
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Add Product</h4>
-        <button type="button" class="btn-close" (click)="closeModal()"></button>
-      </div>
-      <div class="modal-body">
-        Modal Body
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
-        <!-- <button type="button" class="btn btn-primary">Save</button> -->
-      </div>
+      <form [formGroup]="productForm" (ngSubmit)="saveProduct()">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Product</h4>
+          <button type="button" class="btn-close" (click)="closeModal()"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row gy-3">
+            <div class="col-6">
+              <label for="">SKU</label>
+              <input type="text" formControlName="sku" class="form-control">
+            </div>
+            <div class="col-6">
+              <label for="">Full Name</label>
+              <input type="text" class="form-control" formControlName="productName">
+            </div>
+            <div class="col-6">
+              <label for="">Short Name</label>
+              <input type="text" class="form-control" formControlName="shortName">
+            </div>
+            <div class="col-6">
+              <label for="">Select Category</label>
+              <select class="form-control" formControlName="category">
+                <option value="">--Select--</option>
+                <option value="Gadgets">Gadgets</option>
+                <option value="Utensils">Utensils</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Fabrics">Fabrics</option>
+                <option value="Tools">Tools</option>
+                <option value="Stationary">Stationary</option>
+                <option value="Furniture">Furniture</option>
+                <option value="Arts & Crafts">Arts & Crafts</option>
+                <option value="Baking">Baking</option>
+                <option value="Literature">Literature</option>
+              </select>
+            </div>            
+            <div class="col-6">
+              <label for="">Price</label>
+              $<input type="number" class="form-control" formControlName="price">
+            </div>
+            <div class="col-6">
+              <label for="">Delivery Span</label>
+              <select class="form-control" formControlName="deliveryTimeSpan">
+                <option value="">--Select--</option>
+                <option value="2-3 Days">2-3 Days</option>
+                <option value="1 Week">1 Week</option>
+                <option value="2 Weeks">2 Weeks</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label for="">Product Image URL</label>
+              <input type="text" class="form-control" formControlName="thumbnailImageUrl">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+          <button type="submit" class="btn btn-primary">Save Product</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
