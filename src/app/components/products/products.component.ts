@@ -42,13 +42,46 @@ export class ProductsComponent implements OnInit { // implements OnInit hmny add
 
   saveProduct(){
     this.productService.postProduct(this.productForm.value).subscribe({
-      next: (data: ProductSchema) => {
+      next: (response) => {
         console.log(this.productForm.value);
-        alert(`Product Saved Successfully: ${data}`);
+        this.closeModal();
+        alert(`Product Saved Successfully...`);
         this.loadProducts(); // ye function call kiya hai jo api se data le raha hai
       },
       error: (error) => {
         alert(`Failed To Save Product: ${error}`);
+        console.log(error);
+      }
+    });
+  };
+
+  editProduct(id: number){
+    const edit = confirm("Are you sure you want to edit this product?");
+    if(edit){
+      this.productService.getSingleProduct(id).subscribe({
+        next: (response) => {
+          this.productObject = response; // ye response se data ko set karega
+          this.initializeForm();
+          this.openModal(); // ye function call kiya hai jo modal ko open karega
+        }, 
+        error: (error) => {
+          alert("Failed To Edit Product");
+          console.log("error: ", error);
+        }
+      });
+    }
+  }
+
+  updateProduct(){
+    this.productService.editProduct(this.productForm.value).subscribe({
+      next: (data: ProductSchema) => {
+        console.log(this.productForm.value);
+        this.closeModal();
+        alert(`Product Updated Successfully...`);
+        this.loadProducts(); // ye function call kiya hai jo api se data le raha hai
+      },
+      error: (error) => {
+        alert(`Failed To Update Product: ${error}`);
         console.log(error);
       }
     });

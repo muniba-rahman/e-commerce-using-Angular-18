@@ -28,7 +28,7 @@
           <div class="d-flex justify-content-between align-items-center">
             <div class="btn-group">
               <button type="button" class="btn btn-sm btn-outline-danger" (click)="deleteProduct(item.productId)">Delete</button>
-              <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+              <button type="button" class="btn btn-sm btn-outline-primary" (click)="editProduct(item.productId)">Edit</button>
             </div>
             <small class="text-body-secondary">9 mins</small>
           </div>
@@ -50,7 +50,7 @@
 <div class="modal" #newModal>
   <div class="modal-dialog">
     <div class="modal-content">
-      <form [formGroup]="productForm" (ngSubmit)="saveProduct()">
+      <form [formGroup]="productForm">
         <div class="modal-header">
           <h4 class="modal-title">Add Product</h4>
           <button type="button" class="btn-close" (click)="closeModal()"></button>
@@ -106,7 +106,9 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
-          <button type="submit" class="btn btn-primary">Save Product</button>
+          @if(this.productForm.controls["productId"].value == 0){
+            <button type="button" class="btn btn-primary" (click)="saveProduct()">Save Product</button>
+          } @else {<button type="button" class="btn btn-primary" (click)="updateProduct()">Update Product</button>}
         </div>
       </form>
     </div>

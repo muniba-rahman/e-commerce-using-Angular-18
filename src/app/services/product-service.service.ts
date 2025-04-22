@@ -16,8 +16,16 @@ export class ProductServiceService {
     return this.http.get<ProductSchema[]>(`${this.baseUrl}Products?pageNumber=1&pageSize=100`); // ye api se data le raha hai or data ko ProductSchema ki type me convert kar raha hai
   };
 
+  getSingleProduct(id: number) :Observable<ProductSchema> { // yaha hmny bataya ki ye function kesa Observable return karega
+    return this.http.get<any>(`${this.baseUrl}Products/getSingleProduct?id=${id}`); // ye api se data le raha hai or data ko ProductSchema ki type me convert kar raha hai
+  };
+
   postProduct(data: ProductSchema) :Observable<ProductSchema>{
     return this.http.post<ProductSchema>(`${this.baseUrl}Products`, data);
+  };
+
+  editProduct(data: ProductSchema) :Observable<ProductSchema>{
+    return this.http.put<ProductSchema>(`${this.baseUrl}Products`, data);
   };
 
   deleteProduct(id: number) :Observable<ProductSchema>{
