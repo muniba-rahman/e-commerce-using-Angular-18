@@ -1,14 +1,14 @@
 export class ProductSchema {
-    productId: Number;
-    productName: String;
-    shortName: String;
-    category: String;
-    sku: any;
-    price: Number;
-    thumbnailImageUrl: String;
-    deliveryTimeSpan: String;
+    productId: number; 
+    productName: string; 
+    shortName: string;
+    category: string;
+    sku: string;
+    price: number; 
+    thumbnailImageUrl: string;
+    deliveryTimeSpan: string;
 
-    constructor(){
+    constructor() {
         this.productId = 0;
         this.productName = "";
         this.shortName = "";

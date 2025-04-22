@@ -65,7 +65,24 @@ export class ProductsComponent implements OnInit { // implements OnInit hmny add
         console.error("Error loading products", err);
       }
     });
-  }
+  };
+
+  deleteProduct(id: number){
+    const isConfirm = confirm("Are you sure you want to delete this product?");
+    if(isConfirm) {
+      this.productService.deleteProduct(id).subscribe({
+        next: (response) => {
+          alert(`Product Deleted Successfully...`);
+          console.log(response);
+          this.loadProducts();
+        },
+        error: (error) => {
+          alert("Failed To Delete Product");
+          console.log("error: ", error);
+        }
+      });
+    };
+  };
 
   ngOnInit(): void {
     this.loadProducts(); // ye function call kiya hai jo api se data le raha hai
