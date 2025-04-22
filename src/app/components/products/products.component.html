@@ -57,19 +57,32 @@
         </div>
         <div class="modal-body">
           <div class="row gy-3">
-            <div class="col-6">
+            <div class="col-sm-12 col-md-6 col-lg-6">
               <label for="">SKU</label>
               <input type="text" formControlName="sku" class="form-control">
             </div>
-            <div class="col-6">
+            <div class="col-sm-12 col-md-6 col-lg-6">
               <label for="">Full Name</label>
               <input type="text" class="form-control" formControlName="productName">
+              <div class="text-danger">
+                @if(this.productForm.controls['productName'].touched){
+                  @if(this.productForm.controls['productName'].errors?.['required']){
+                    <p>Product Name is required</p>
+                  } @else if(this.productForm.controls['productName'].errors?.['minlength']){
+                    <p>Product Name should be min 3 characters long</p>
+                  } @else if(this.productForm.controls['productName'].errors?.['maxlength']){
+                    <p>Product Name should not exceed 20 characters</p>
+                  } @else if(this.productForm.controls['productName'].errors?.['pattern']){
+                    <p>Product Name should not contain special characters</p>
+                  }
+                }
+              </div>
             </div>
-            <div class="col-6">
+            <div class="col-sm-12 col-md-6 col-lg-6">
               <label for="">Short Name</label>
               <input type="text" class="form-control" formControlName="shortName">
             </div>
-            <div class="col-6">
+            <div class="col-sm-12 col-md-6 col-lg-6">
               <label for="">Select Category</label>
               <select class="form-control" formControlName="category">
                 <option value="">--Select--</option>
@@ -85,11 +98,11 @@
                 <option value="Literature">Literature</option>
               </select>
             </div>            
-            <div class="col-6">
+            <div class="col-sm-12 col-md-6 col-lg-6">
               <label for="">Price</label>
               $<input type="number" class="form-control" formControlName="price">
             </div>
-            <div class="col-6">
+            <div class="col-sm-12 col-md-6 col-lg-6">
               <label for="">Delivery Span</label>
               <select class="form-control" formControlName="deliveryTimeSpan">
                 <option value="">--Select--</option>
@@ -107,8 +120,8 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
           @if(this.productForm.controls["productId"].value == 0){
-            <button type="button" class="btn btn-primary" (click)="saveProduct()">Save Product</button>
-          } @else {<button type="button" class="btn btn-primary" (click)="updateProduct()">Update Product</button>}
+            <button type="button" class="btn btn-primary" [disabled]="productForm.invalid" (click)="saveProduct()">Save Product</button>
+          } @else {<button type="button" class="btn btn-primary" [disabled]="productForm.invalid" (click)="updateProduct()">Update Product</button>}
         </div>
       </form>
     </div>

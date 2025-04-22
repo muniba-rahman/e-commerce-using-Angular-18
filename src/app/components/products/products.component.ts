@@ -32,7 +32,7 @@ export class ProductsComponent implements OnInit { // implements OnInit hmny add
       productId: new FormControl(this.productObject.productId), // ye form control hai jo form ko track karega or jab bhi form change hoga to ye update hoga
       productName: new FormControl(this.productObject.productName, [Validators.required, Validators.minLength(4)]),
       shortName: new FormControl(this.productObject.shortName),
-      category: new FormControl(this.productObject.category, Validators.required),
+      category: new FormControl(this.productObject.category),
       sku: new FormControl(this.productObject.sku, Validators.required),
       price: new FormControl(this.productObject.price),
       thumbnailImageUrl: new FormControl(this.productObject.thumbnailImageUrl),
